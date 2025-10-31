@@ -10,6 +10,9 @@ inputs:
   icon:
     description: "Path to the icon"
     required: true
+  desktop-file:
+    description: "Path to the desktop file (linux)"
+    required: false
   input:
     description: "Path to the JAR file"
     required: true
@@ -26,6 +29,7 @@ runs:
         PROGRAM: "${{ inputs.id }}"
         PROGRAM_NAME: "${{ inputs.name }}"
         PROGRAM_ICON: "${{ inputs.icon }}"
+        PROGRAM_DESKTOP_FILE: "${{ inputs.desktop-file }}"
         INPUT: "${{ inputs.input }}"
         OUTPUT: "{{ inputs.output }}"
       run: |
