@@ -1,0 +1,33 @@
+name: "JAR to Executable"
+description: "Runs a specified JAR and saves the resulting standalone executable to Output"
+inputs:
+  id:
+    description: "ID of the program (minus extension)"
+    required: true
+  name:
+    description: "Name of the program. Default to `id` if unspecified."
+    required: false
+  icon:
+    description: "Path to the icon"
+    required: true
+  input:
+    description: "Path to the JAR file"
+    required: true
+  output:
+    description: "Path to save the output"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build AppImage (Linux)
+      if: runner.os == 'Linux'
+      shell: bash
+        PROGRAM: "${{ inputs.id }}"
+        PROGRAM_NAME: "${{ inputs.name }}"
+        PROGRAM_ICON: "${{ inputs.icon }}"
+        INPUT: "${{ inputs.input }}"
+        OUTPUT: "{{ inputs.output }}"
+      run: |
+        chmod +x ${{ github.action_path }}/package.sh
+        ${{ github.action_path }}/package.sh
