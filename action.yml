@@ -26,12 +26,13 @@ runs:
     - name: Build AppImage (Linux)
       if: runner.os == 'Linux'
       shell: bash
+      env:
         PROGRAM: "${{ inputs.id }}"
         PROGRAM_NAME: "${{ inputs.name }}"
         PROGRAM_ICON: "${{ inputs.icon }}"
         PROGRAM_DESKTOP_FILE: "${{ inputs.desktop-file }}"
         INPUT: "${{ inputs.input }}"
-        OUTPUT: "{{ inputs.output }}"
+        OUTPUT: "${{ inputs.output }}"
       run: |
         chmod +x ${{ github.action_path }}/package.sh
         ${{ github.action_path }}/package.sh
