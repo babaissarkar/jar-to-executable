@@ -33,11 +33,29 @@ run_jlink() {
 	--no-man-pages
 }
 
+make_launcher() {
+	local PROGRAM="$1"
+	local OUTFILE="$2"
+
+	cat > "$OUTFILE" <<EOF
+#!/bin/sh
+HERE="\$(dirname "\$(readlink -f "\${0}")")"
+cd "\$HERE"
+"\$HERE/java" -Djava.library.path=./lib -Dsun.java2d.xrender=false -Dsun.java2d.d3d=false \
+-splash:images/splashJV.png -jar "\$HERE/../share/${PROGRAM}/${PROGRAM}.jar" "\$@"
+EOF
+
+	chmod +x "$OUTFILE"
+}
+
 # Run jlink to create runtime
 run_jlink
 
 # download AppRun
 wget -nc --verbose -O AppRun ${APPRUN_DOWNLOAD_URL}
+
+# make launcher
+make_launcher ${PROGRAM} "./${PROGRAM}"
 
 # create directory structure
 mkdir -p ${PROGRAM_NAME}.AppDir/usr/share/${PROGRAM}
