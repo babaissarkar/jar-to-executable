@@ -11,10 +11,10 @@ inputs:
     description: "Path to the icon"
     required: true
   desktop-file:
-    description: "Path to the desktop file (linux)"
+    description: "Path to the desktop file (Linux)"
     required: false
   input:
-    description: "Path to the JAR file"
+    description: "Path to the JAR file (Linux) or to jpackage generated app-image folder (Windows)"
     required: true
   output:
     description: "Path to save the output"
@@ -36,3 +36,28 @@ runs:
       run: |
         chmod +x ${{ github.action_path }}/package.sh
         ${{ github.action_path }}/package.sh
+        
+    - name: Build Portable EXE (Win)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      env:
+        PROGRAM: "${{ inputs.id }}"
+        PROGRAM_NAME: "${{ inputs.name }}"
+        INPUT: "${{ inputs.input }}"
+        OUTPUT: "${{ inputs.output }}"
+      run: |
+        $archive = "$env:PROGRAM.7z"
+        $lzma_download_url = "https://github.com/ip7z/7zip/releases/latest/download/lzma2501.7z"
+
+        # Fetch 7-Zip SFX executable header
+        Invoke-WebRequest -Uri $lzma_download_url -OutFile "lzma.7z"
+        7z e lzma.7z 7zS2con.sfx -r -y
+        Remove-Item lzma.7z -Force
+
+        # Compress the folder into archive
+        7z a $archive $env:INPUT
+
+        # Combine SFX header + archive into final portable executable
+        cmd /c "copy /b 7zS2con.sfx + $archive $env:OUTPUT"
+
+        Remove-Item $archive, "7zS2con.sfx" -Force
