@@ -46,3 +46,5 @@ This GitHub Action converts Java JAR files into standalone executables for both 
     input: target/jpackage/myapp
     output: dist/MyApp.exe
 ```
+
+A more comprehensive example can be found [here](https://github.com/babaissarkar/wml-parser-lsp/blob/60f49f4a2fa257adc005ebcf36f68cb3352f0040/.github/workflows/maven-publish.yml).
