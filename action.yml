@@ -1,5 +1,8 @@
 name: "JAR to Executable"
 description: "Runs a specified JAR and saves the resulting standalone executable to Output"
+branding:
+  icon: arrow-down-circle
+  color: purple
 inputs:
   id:
     description: "ID of the program (minus extension)"
