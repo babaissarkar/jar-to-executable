@@ -13,7 +13,7 @@ This GitHub Action converts Java JAR files into standalone executables for both 
 |-------|-------------|----------|---------|
 | `id` | ID of the program (without file extension) | ✅ | - |
 | `name` | Name of the program | ❌ | Value of `id` |
-| `icon` | Path to the icon file | ✅ | - |
+| `icon` | Path to the icon file | ❌ | - |
 | `desktop-file` | Path to the desktop file (Linux only) | ❌ | - |
 | `input` | Path to JAR file (Linux) or jpackage app-image folder (Windows) | ✅ | - |
 | `output` | Path to save the output executable | ✅ | - |

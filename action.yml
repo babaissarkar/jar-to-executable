@@ -9,9 +9,9 @@ inputs:
     required: false
   icon:
     description: "Path to the icon (.png on Linux/.ico on Windows)"
-    required: true
+    required: false
   desktop-file:
-    description: "Path to the desktop file (Linux)"
+    description: "Path to the desktop file (mandatory on Linux)"
     required: false
   input:
     description: "Path to the JAR file (Linux) or to jpackage generated app-image folder (Windows)"

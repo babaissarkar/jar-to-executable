@@ -62,7 +62,12 @@ mkdir -p ${PROGRAM_NAME}.AppDir/usr/share/${PROGRAM}
 cp ${INPUT} ${PROGRAM_NAME}.AppDir/usr/share/${PROGRAM}/
 cp ${PROGRAM} ${PROGRAM_NAME}.AppDir/usr/bin/
 cp AppRun ${PROGRAM_NAME}.AppDir/
-cp ${PROGRAM_ICON} ${PROGRAM_NAME}.AppDir/
+if [[ -n "$ICON" && -f "$ICON" && "$ICON" == *.png ]]; then
+  echo "Setting icon: $ICON"
+  cp ${PROGRAM_ICON} ${PROGRAM_NAME}.AppDir/
+else
+  echo "Icon missing or invalid (.png not found), skipping."
+fi
 cp ${PROGRAM_DESKTOP_FILE} ${PROGRAM_NAME}.AppDir/
 
 # download appimagetool
