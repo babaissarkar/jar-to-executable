@@ -65,7 +65,8 @@ runs:
         # Set Icon
         Invoke-WebRequest -Uri $rcedit_download_url -OutFile rcedit.exe
         if ($env:ICON -and (Test-Path $env:ICON) -and ($env:ICON -match '\.ico$')) {
-          rcedit.exe $env:OUTPUT --set-icon $env:ICON
+          Write-Host "Setting icon: $env:ICON"
+          .\rcedit.exe $env:OUTPUT --set-icon $env:ICON
         } else {
           Write-Host "Icon does not exist, skipping."
         }
