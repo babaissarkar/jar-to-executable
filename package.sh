@@ -62,8 +62,8 @@ mkdir -p ${PROGRAM_NAME}.AppDir/usr/share/${PROGRAM}
 cp ${INPUT} ${PROGRAM_NAME}.AppDir/usr/share/${PROGRAM}/
 cp ${PROGRAM} ${PROGRAM_NAME}.AppDir/usr/bin/
 cp AppRun ${PROGRAM_NAME}.AppDir/
-if [[ -n "$ICON" && -f "$ICON" && "$ICON" == *.png ]]; then
-  echo "Setting icon: $ICON"
+if [[ -n "$PROGRAM_ICON" && -f "$PROGRAM_ICON" && "$PROGRAM_ICON" == *.png ]]; then
+  echo "Setting icon: $PROGRAM_ICON"
   cp ${PROGRAM_ICON} ${PROGRAM_NAME}.AppDir/
 else
   echo "Icon missing or invalid (.png not found), skipping."
