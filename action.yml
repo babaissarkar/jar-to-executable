@@ -64,14 +64,18 @@ runs:
 
         # Combine SFX header + archive into final portable executable
         Get-Content "7zS2con.sfx","$archive" -AsByteStream -ReadCount 512 | Set-Content $env:OUTPUT -AsByteStream
+        
+        dir
 
         # Set Icon
-        Invoke-WebRequest -Uri $rcedit_download_url -OutFile rcedit.exe
-        if ($env:ICON -and (Test-Path $env:ICON) -and ($env:ICON -match '\.ico$')) {
-          Write-Host "Setting icon: $env:ICON"
-          .\rcedit.exe $env:OUTPUT --set-icon $env:ICON
-        } else {
-          Write-Host "Icon does not exist, skipping."
-        }
+        #Invoke-WebRequest -Uri $rcedit_download_url -OutFile rcedit.exe
+        #if ($env:ICON -and (Test-Path $env:ICON) -and ($env:ICON -match '\.ico$')) {
+        #  Write-Host "Setting icon: $env:ICON"
+        #  .\rcedit.exe $env:OUTPUT --set-icon $env:ICON
+        #} else {
+        #  Write-Host "Icon does not exist, skipping."
+        #}
 
         Remove-Item $archive, 7zS2con.sfx -Force
+        
+        dir
