@@ -53,6 +53,7 @@ run_jlink
 
 # download AppRun
 wget -nc --verbose -O AppRun ${APPRUN_DOWNLOAD_URL}
+chmod +x ./AppRun
 
 # make launcher
 make_launcher ${PROGRAM} "./${PROGRAM}"
