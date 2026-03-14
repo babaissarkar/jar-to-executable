@@ -51,7 +51,7 @@ runs:
         OUTPUT: "${{ inputs.output }}"
       run: |
         $archive = "$env:PROGRAM.7z"
-        $lzma_download_url = "https://github.com/ip7z/7zip/releases/latest/download/lzma2501.7z"
+        $lzma_download_url = "https://github.com/ip7z/7zip/releases/download/26.00/lzma2600.7z"
         $rcedit_download_url = "https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe"
 
         # Fetch 7-Zip SFX executable header
